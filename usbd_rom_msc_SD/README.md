@@ -12,8 +12,8 @@ Also there is 4Gb card size limit, because I couldn't figure out how to work wit
 
 The cards tested:
 
-|Type|Format|Version|Brand|Size|Size reported, MB|Date|SPI read,kb/s|USB read,kb/s|USB write,kb/s|
-|----|------|-------|-----|----|-----------------|----|-------------|-------------|--------------|
+|Type|Format|Version|Brand|Size|Size reported, MB|Production date|SPI read, kb/s|USB read, kb/s|USB write, kb/s|
+|----|------|-------|-----|----|-----------------|---------------|--------------|--------------|---------------|
 |MultiMediaCard|MMCmobile|MMC| |64Mb|61|2007-06|906|435|360|
 |Secure Digital|microSD|SD2.0|Samsung|2Gb|1936|2009-10|851|420|210|
 |Secure Digital|microSD|SD2.0|noname|1Gb|922|2009-12|801|325|55|
