@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ProjectWorkspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_mpw.xsd">
+
+  <SchemaVersion>1.0</SchemaVersion>
+
+  <Header>### uVision Project, (C) Keil Software</Header>
+
+  <WorkspaceName>WorkSpace</WorkspaceName>
+
+  <project>
+    <PathAndName>.\usbd_rom_msc_EEPROM\usbd_rom_msc_EEPROM.uvproj</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\usbd_rom_msc_FLASH\usbd_rom_msc_FLASH.uvproj</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\usbd_rom_msc_RAM\usbd_rom_msc_RAM.uvproj</PathAndName>
+  </project>
+
+  <project>
+    <PathAndName>.\usbd_rom_msc_SD\usbd_rom_msc_SD.uvproj</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+  </project>
+
+</ProjectWorkspace>
