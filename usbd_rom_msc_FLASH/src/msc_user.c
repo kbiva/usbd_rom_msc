@@ -104,6 +104,7 @@ void MSC_Read(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t hig
 
 void MSC_Write(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t high_offset) {
   
+	// update only FAT or root directory, don't write to the flash memory
   if(offset<SYSTEM_BLOCKS*BLOCK_SIZE) {
     memcpy(&image[offset],*buff_adr,length);
   }
