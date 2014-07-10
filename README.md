@@ -1,4 +1,4 @@
-usbd_rom_msc_EEPROM 
+usbd_rom_msc
 ================
 
 In the latest LPCOpen release 2.08c for the LPCXpresso LPC1549 board there are
