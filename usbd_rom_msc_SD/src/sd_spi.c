@@ -57,7 +57,7 @@ static void setupSpiMaster(uint8_t clkdiv) {
 }
 
 static void GenerateCRCTable(void) {
-	
+  
   int i, j;
   uint8_t CRCPoly = 0x89;  // the value of our CRC-7 polynomial
  
@@ -177,15 +177,15 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
   
   GenerateCRCTable();
   Init_SPI_PinMux();
-	
-	// Initialization at slow speed
+  
+  // Initialization at slow speed
   setupSpiMaster(SystemCoreClock/400000-1);// 400Khz
 
   for(i=0;i<10;i++) {
     SPI_WriteDummyByteCSHigh();
   }
   
-	// Go idle state
+  // Go idle state
   if(sd_send_command(CMD0,0)!=SD_OK) {
     return ERROR_GO_IDLE_STATE_TIMEOUT;
   }
@@ -194,7 +194,7 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
     return ERROR_GO_IDLE_STATE_RESPONSE;
   }
   
-	// SEND_IF_COND
+  // SEND_IF_COND
   if(sd_send_command(CMD8, 0x000001AA)!=SD_OK) {
     return ERROR_SEND_IF_COND_TIMEOUT;
   }
@@ -211,7 +211,7 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
         
           time1=DWT_Get();
           
-					// Loop till card goes out of idle
+          // Loop till card goes out of idle
           do {  
             if(sd_send_command(CMD1,0)!=SD_OK) {
               return ERROR_SEND_OP_COND_TIMEOUT;
@@ -224,29 +224,29 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
           }
         }
         else {
-					// SD 1.x					
+          // SD 1.x          
           cardinfo->CardType = SD_CARD_STD_CAPACITY_V1_1;
-					// TODO: Didn't have SD 1.x cards to test the loop below
-					// Loop till card goes out of idle
-					do
-					{
-						if(sd_send_command(CMD55,0)==SD_OK) {
-							if(sd_send_command(ACMD41,0)!=SD_OK) {
-								return ERROR_SD_SEND_OP_COND_TIMEOUT;								
-							}
-						}
-						else
-						{
-							return ERROR_APP_CMD_TIMEOUT;
-						}
-						time2=DWT_Get();
-					}
-					while (((response[0]&R1_IN_IDLE_STATE)==R1_IN_IDLE_STATE) && (time2-time1 < SD_CMD_TIMEOUT));
-					
-					// As long as we didn’t hit the timeout, assume we’re OK.
-					if (time2-time1 >= SD_CMD_TIMEOUT) {    
-						return ERROR_INIT_TIMEOUT;
-					}
+          // TODO: Didn't have SD 1.x cards to test the loop below
+          // Loop till card goes out of idle
+          do
+          {
+            if(sd_send_command(CMD55,0)==SD_OK) {
+              if(sd_send_command(ACMD41,0)!=SD_OK) {
+                return ERROR_SD_SEND_OP_COND_TIMEOUT;                
+              }
+            }
+            else
+            {
+              return ERROR_APP_CMD_TIMEOUT;
+            }
+            time2=DWT_Get();
+          }
+          while (((response[0]&R1_IN_IDLE_STATE)==R1_IN_IDLE_STATE) && (time2-time1 < SD_CMD_TIMEOUT));
+          
+          // As long as we didn’t hit the timeout, assume we’re OK.
+          if (time2-time1 >= SD_CMD_TIMEOUT) {    
+            return ERROR_INIT_TIMEOUT;
+          }
         }        
       }
       else {
@@ -263,7 +263,7 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
     
     time1=DWT_Get();
   
-		// Loop till card goes out of idle
+    // Loop till card goes out of idle
     do
     {
       if(sd_send_command(CMD55,0)==SD_OK) {
@@ -288,7 +288,7 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
     return ERROR_SEND_IF_COND_RESPONSE;
   }
   
-	// Read OCR register for supported voltages and SDHC bit
+  // Read OCR register for supported voltages and SDHC bit
   if(sd_send_command(CMD58,0)!=SD_OK) {
     return ERROR_READ_OCR_TIMEOUT;
   }
@@ -301,7 +301,7 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
   // Test for SDHC  
   if(cardinfo->CardType == SD_CARD_STD_CAPACITY_V2_0) {    
     if((response[1]&0x40)==0x40){
-			// SDHC
+      // SDHC
       cardinfo->CardType = SD_CARD_HIGH_CAPACITY;
     }    
   }  
@@ -309,19 +309,19 @@ SD_ERROR init_sd_spi(SD_CardInfo *cardinfo) {
   // After initialization go full speed  
   setupSpiMaster(SystemCoreClock/24000000-1);//24Mhz
   
-	// Read and decode CID register
+  // Read and decode CID register
   tmp=sd_read_cid(&cardinfo->SD_cid,cardinfo->CardType);
   if(tmp!=SD_OK) {
     return tmp;
   }
   
-	// Read and decode CSD register
+  // Read and decode CSD register
   tmp=sd_read_csd(&cardinfo->SD_csd,cardinfo->CardType);
   if(tmp!=SD_OK) {
     return tmp;
   }
   
-	// Calculate card capacity
+  // Calculate card capacity
   if ((cardinfo->CardType == SD_CARD_STD_CAPACITY_V1_1) || 
       (cardinfo->CardType == SD_CARD_STD_CAPACITY_V2_0) ||
       (cardinfo->CardType == MULTIMEDIA_CARD)) {
@@ -345,7 +345,7 @@ uint8_t sd_read_block (uint32_t blockaddr,uint8_t *data) {
   uint8_t tmp;
   uint32_t time1,time2;
 
-	// convert to block address
+  // convert to block address
   if(cardinfo.CardType!=SD_CARD_HIGH_CAPACITY) {
     blockaddr<<=SD_BLOCKSIZE_NBITS;
   }
@@ -398,7 +398,7 @@ uint8_t sd_write_block (uint32_t blockaddr,uint8_t *data) {
   uint32_t i;
   uint8_t tmp;
 
-	// convert to block address
+  // convert to block address
   if(cardinfo.CardType!=SD_CARD_HIGH_CAPACITY) {
     blockaddr<<=SD_BLOCKSIZE_NBITS;
   }

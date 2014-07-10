@@ -63,7 +63,7 @@ int main(void) {
   init_uart(115200);
     
   sderr=init_sd_spi(&cardinfo);
-	
+  
   switch(sderr) {
     case SD_OK:
       sprintf(buffer,"\r\n----->Card initialization OK\r\n");
@@ -452,7 +452,7 @@ int main(void) {
     msc_param.MSC_Write = MSC_Write;
     msc_param.MSC_Read = MSC_Read;
     msc_param.MSC_Verify = MSC_Verify;
-		
+    
     ret = USBD_API->msc->init(g_hUsb, &msc_param);
       
     if(ret == LPC_OK) {

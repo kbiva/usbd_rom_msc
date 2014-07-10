@@ -25,9 +25,9 @@ void MSC_Read(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t hig
   
   uint32_t j = offset%SD_BLOCKSIZE;
   
-	// Host requests data in chunks of 512 bytes, USB bulk endpoint size is 64 bytes.
-	// For each sector of 512 bytes, this function gets called 8 times with length=64 bytes
-	// First time read whole 512 bytes sector, and then just change pointer in the buffer
+  // Host requests data in chunks of 512 bytes, USB bulk endpoint size is 64 bytes.
+  // For each sector of 512 bytes, this function gets called 8 times with length=64 bytes
+  // First time read whole 512 bytes sector, and then just change pointer in the buffer
   if(j==0) {
     sd_read_block(offset/SD_BLOCKSIZE,bufr);
   }  
@@ -39,9 +39,9 @@ void MSC_Write(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t hi
 
   uint32_t j = offset%SD_BLOCKSIZE;
   
-	// Host requests data in chunks of 512 bytes, USB bulk endpoint size is 64 bytes.
-	// For each sector of 512 bytes, this function gets called 8 times with length=64 bytes
-	// Accumulate all requests in the buffer, and on the last request write 512 bytes to the card.
+  // Host requests data in chunks of 512 bytes, USB bulk endpoint size is 64 bytes.
+  // For each sector of 512 bytes, this function gets called 8 times with length=64 bytes
+  // Accumulate all requests in the buffer, and on the last request write 512 bytes to the card.
   memcpy(&bufw[j],*buff_adr,length);
   
   if((offset+USB_FS_MAX_BULK_PACKET)%SD_BLOCKSIZE==0) {

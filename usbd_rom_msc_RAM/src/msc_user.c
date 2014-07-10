@@ -34,27 +34,27 @@ const uint8_t sector_image_0[] = {
 };
 
 const uint8_t sector_image_1[] = {
-    //sector 1: FAT 1
-    0xF8,0xFF,0xFF,
+  //sector 1: FAT 1
+  0xF8,0xFF,0xFF,
 };
 
 const uint8_t sector_image_2[] = {
-    //sector 2: root directory
-    //entry 1 - Volume label
-    'L','P','C','1','5','4','9',' ','U','S','B',0x28,
+  //sector 2: root directory
+  //entry 1 - Volume label
+  'L','P','C','1','5','4','9',' ','U','S','B',0x28,
 };
 
 void usbd_msc_init(void) {
   
-	// Prepare Boot sector
+  // Prepare Boot sector
   memcpy(&image[0], sector_image_0, sizeof(sector_image_0));
   image[510]=0x55;
   image[511]=0xAA;
-	
-	// Prepare FAT sector
+  
+  // Prepare FAT sector
   memcpy(&image[512], sector_image_1, sizeof(sector_image_1));
-	
-	// Prepare Root directory sector
+  
+  // Prepare Root directory sector
   memcpy(&image[1024], sector_image_2, sizeof(sector_image_2));
   
   // 28Kb RAM, 26.5Kb free
@@ -70,7 +70,7 @@ void MSC_Read(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t hig
 
 void MSC_Write(uint32_t offset, uint8_t** buff_adr, uint32_t length, uint32_t high_offset) {
   
-  memcpy(&image[offset],*buff_adr,length);	
+  memcpy(&image[offset],*buff_adr,length);  
 }
 
 ErrorCode_t MSC_Verify(uint32_t offset, uint8_t* src, uint32_t length, uint32_t high_offset) {
