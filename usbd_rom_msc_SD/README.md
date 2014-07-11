@@ -7,6 +7,8 @@ When connected to PC, the board enumerates as mass storage device, and presents 
 
 The contents of the disk will be whatever is on the connected SD/MMC memory card.
 
+The connection is USB 2.0 Full speed (12mbit/s).
+
 The result is USB Card reader, but with rather slow speed. 
 
 The speed depends on the memory card, and can be ~265-435kb/s for reading, and 136-360kb/s for writing.
