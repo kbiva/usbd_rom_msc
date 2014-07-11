@@ -2,12 +2,17 @@ usbd_rom_msc_SD
 ================
 
 I used SD Card module from "LC studio".
-When connected to PC, the board enumerates as mass storage device, and presents itself 
-as a disk. The contents of the disk will be whatever is on the connected SD/MMC memory card.
-The result is USB Card reader, but with rather slow speed. The speed depends on the memory card,
-and can be ~265-435kb/s for reading, and 136-360kb/s for writing.
-The memory card information from CID and CSD registers is written to UART, and can be viewed in
-connected terminal.
+
+When connected to PC, the board enumerates as mass storage device, and presents itself as a disk. 
+
+The contents of the disk will be whatever is on the connected SD/MMC memory card.
+
+The result is USB Card reader, but with rather slow speed. 
+
+The speed depends on the memory card, and can be ~265-435kb/s for reading, and 136-360kb/s for writing.
+
+The memory card information from CID and CSD registers is written to UART, and can be viewed in connected terminal.
+
 Also there is 4Gb card size limit, because I couldn't figure out how to work with bigger sizes.
 
 The cards tested:
@@ -27,5 +32,6 @@ The cards tested:
 |Secure Digital|SD|SD2.0|Kingston|2Gb|1882|2011-01|282|325|13|
 
 SPI speed was masured reading first 1000 sectors from the card.
-USB speeds were measured copying 40Mb file from PC to the card and from the card to the PC.
-For 16Mb cards file was 15Mb.
+
+USB speeds were measured copying 40Mb file from PC to the card and from the card to the PC. For 16Mb cards file was 15Mb.
+
